@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fibonacci with Rust and Wasm</title>
+</head>
+<body>
+    <h1>Fibonacci in WebAssembly</h1>
+    <input type="number" id="fib-input" placeholder="Enter a number">
+    <button id="fib-btn">Calculate Fibonacci</button>
+    <p id="fib-result"></p>
+
+    <script type="module">
+        import init, { fibonacci } from './out/fibonacci-wasm.js';
+
+        init().then(() => {
+            document.getElementById('fib-btn').addEventListener('click', () => {
+                const input = document.getElementById('fib-input').value;
+                const result = fibonacci(parseInt(input, 10));
+                document.getElementById('fib-result').textContent = `Fibonacci(${input}) = ${result}`;
+            });
+        });
+    </script>
+</body>
+</html>
